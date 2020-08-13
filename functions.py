@@ -46,12 +46,13 @@ def summary():
     global hook, whichacct
     summary = hook + 'portfolio/{}/summary'.format(getaccount(whichacct))
     try:
-        response = requests.get(summary, verify = False).json()
+        response = requests.get(summary, verify = False)
     except requests.exceptions.ConnectionError:
         print("No response")
         return
-    if response != "No response":
-        print('Net Liquidity: ',response['netliquidation']['amount'])
+    print(response)
+    if response.json() != "No response":
+        print('Net Liquidity: ',response.json()['netliquidation']['amount'])
     else:
         print(response)
 
@@ -99,10 +100,14 @@ def logout():
 def getaccount(number):
     global hook
     try:
-        response = requests.get(hook + 'portfolio/accounts', verify=False).json()
+        response = requests.get(hook + 'portfolio/accounts', verify=False)
     except requests.exceptions.ConnectionError:
         return 'no response'
-    return response[number]['id']
+    if response.status_code != 200:
+        print('Server failed.')
+        tickle()
+        getaccount(number)
+    return response.json()[number]['id']
 
 if __name__ == "__main__":
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
