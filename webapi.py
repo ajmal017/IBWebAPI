@@ -1,28 +1,57 @@
 import requests
 from requests.packages import urllib3
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+import webbrowser
+import subprocess
+import sys
 
 hook = 'https://localhost:5000/v1/portal/'
+whichacct = 1
 
 def tickle():
-    tickle = 'https://localhost:5000/v1/portal/tickle'
-    response = requests.post(tickle, verify=False)
-    print(response)
-    print(response.status_code == 200)
+    global hook
+    tickle = hook + 'tickle'
+    try:
+        response = requests.post(tickle, verify=False).json()
+    except requests.exceptions.ConnectionError:
+        print("No response")
+        return
+    if 'session' in response.keys() and response['session'] == 'no session':
+        print('Session ended, login again')
+        subprocess.Popen(['sh', './autologin.sh'])
+        time.sleep(10)
+        authstatus()
+        response = requests.post(tickle, verify=False).json()
+    if 'iserver' in response.keys():
+        print('Server tickled.')
+    else:
+        print('Unknown error.')
 
-def keepalive():
-    auth = 'https://localhost:5000/v1/portal/iserver/auth/status'
-    response = requests.get(auth, verify=False).json()
-    print(response['authenticated'])
+def authstatus():
+    global hook
+    auth = hook + 'iserver/auth/status'
+    try:
+        response = requests.post(auth, verify=False)
+    except requests.exceptions.ConnectionError:
+        print("No response")
+        return
+    if response.status_code != 200:
+        print('Server failed.')
+        return
+    print(response.json()['authenticated'])
 
 def summary():
-    global accountId
-    summary = 'https://localhost:5000/v1/portal/portfolio/{}/summary'.format(accountId)
+    global hook, whichacct
+    summary = hook + 'portfolio/{}/summary'.format(getaccount(whichacct))
     try:
         response = requests.get(summary, verify = False).json()
     except requests.exceptions.ConnectionError:
-        response = "No response"
+        print("No response")
+        return
     if response != "No response":
-        print(response['netliquidation']['amount'])
+        print('Net Liquidity: ',response['netliquidation']['amount'])
     else:
         print(response)
 
@@ -52,7 +81,23 @@ def getinfo(accountId, infotype):
             return 'no response'
     return response
 
+def login():
+    subprocess.call(['sh', './autologin.sh'])
+
+def logout():
+    global hook
+    try:
+        response = requests.post(hook + 'logout', verify=False)
+    except requests.exceptions.ConnectionError:
+        print("No response")
+        return
+    if response.status_code == 200:
+        print("Logout success")
+    else:
+        print("Logout failed")
+
 def getaccount(number):
+    global hook
     try:
         response = requests.get(hook + 'portfolio/accounts', verify=False).json()
     except requests.exceptions.ConnectionError:
@@ -61,7 +106,14 @@ def getaccount(number):
 
 if __name__ == "__main__":
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    print('new try')
-    accountId = getaccount(1)
-    print(accountId)
-    print(getinfo(accountId, 'summary'))
+    # tickle()
+    # print(logout())
+    # authstatus()
+    # accountId = getaccount(1)
+    # print(getinfo(accountId, 'summary'))
+
+    globals()[sys.argv[1]]()
+    # if sys.argv[1] == 'today':
+    #     today(str(sys.argv[2]))
+    # else:
+    #     pass
