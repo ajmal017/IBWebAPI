@@ -44,14 +44,33 @@ def authstatus():
 
 def summary():
     global hook, whichacct
-    summary = hook + 'portfolio/{}/summary'.format(getaccount(whichacct))
+    getacct = getaccount(whichacct)
+    if getacct == 'No response':
+        return 'No response'
+    retries = 0
+    while getacct == 'Not logged in':
+        sleeper = 5
+        while sleeper > 0:
+            print('Server failed. Retrying in {}...'.format(sleeper))
+            time.sleep(1)
+            sleeper -= 1
+        retries += 1
+        if retries == 2:
+            break
+        else:
+            getacct = getaccount(whichacct)
+            continue
+    if getacct == 'Not logged in':
+        print('Still not logged in, initiating login...')
+        login()
+        time.sleep(10)
+    summary = hook + 'portfolio/{}/summary'.format(getacct)
     try:
         response = requests.get(summary, verify = False)
     except requests.exceptions.ConnectionError:
         print("No response")
         return
-    print(response)
-    if response.json() != "No response":
+    if response.status_code == 200:
         print('Net Liquidity: ',response.json()['netliquidation']['amount'])
     else:
         print(response)
@@ -99,14 +118,16 @@ def logout():
 
 def getaccount(number):
     global hook
+    print('Getting account...')
     try:
         response = requests.get(hook + 'portfolio/accounts', verify=False)
     except requests.exceptions.ConnectionError:
-        return 'no response'
+        print('No response')
+        return 'No response'
+    print('response received.')
     if response.status_code != 200:
-        print('Server failed.')
-        tickle()
-        getaccount(number)
+        print('Not logged in')
+        return 'Not logged in'
     return response.json()[number]['id']
 
 if __name__ == "__main__":
