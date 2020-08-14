@@ -4662,3 +4662,19 @@ io.vertx.core.VertxException: Connection was closed
 <- 200 GET /v1/portal/portfolio/accounts
 -> GET /v1/portal/portfolio/U3167608/summary
 <- 200 GET /v1/portal/portfolio/U3167608/summary
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|88ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|67ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|68ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|80ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|116ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|329ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|1357ms
+-> request: /v1/api/tickle
+-> GET /v1/api/tickle,200|55ms
