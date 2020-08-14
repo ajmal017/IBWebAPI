@@ -9,18 +9,19 @@ You need to **update the .config file** with your own Interactive Brokers userna
 Also, **update the global var whichacct in functions.py** to suit your needs. I have 2 accounts, and I want to retrieve info on the second, which is why I've set whichacct = 1. If you only have 1 account or want to access your first account, **set whichacct = 0**.
 
 **Login**
-'''python functions.py login'''
+```python functions.py login```
+
 **Logout**
-'''python functions.py logout'''
+```python functions.py logout```
 
 **Tickle**
-'''python functions.py tickle'''
+```python functions.py tickle```
 Pings the server to keep it alive.
 
 **Summary**
-'''python functions.py summary'''
+```python functions.py summary```
 Prints the account net liquidation value.
 
 **Authorization Status**
-'''python functions.py authstatus'''
+```python functions.py authstatus```
 Checks if the account is logged in.
