@@ -9217,3 +9217,19 @@ io.vertx.core.impl.NoStackTraceThrowable: 404
 12:13:28.980 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":376183,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
 12:13:57.677 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|55ms
 12:13:57.678 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":347431,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:14:27.815 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|193ms
+12:14:27.815 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":317291,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:14:45.250 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /sso/ping,200|63ms
+12:14:45.251 INFO  vert.x-eventloop-thread-0 SsoService           : sso ping {"result": "true"}
+12:14:57.678 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|56ms
+12:14:57.678 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":287428,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:15:27.676 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|52ms
+12:15:27.678 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":257429,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:15:57.797 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|171ms
+12:15:57.798 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":227308,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:16:27.698 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|69ms
+12:16:27.698 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":197406,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:16:57.688 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|62ms
+12:16:57.688 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":167415,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
+12:17:27.784 INFO  vert.x-eventloop-thread-0 BaseServiceProxy     : -> GET /v1/api/tickle,200|154ms
+12:17:27.785 DEBUG vert.x-eventloop-thread-0 ClientPortalService  : tickle {"ssoExpires":137318,"collission":false,"userId":42917296,"iserver":{"tickle":true,"authStatus":{"authenticated":true,"competing":false,"connected":true,"message":"","MAC":"48:DF:37:57:33:80"}}}
