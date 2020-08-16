@@ -8,6 +8,8 @@ You need to **update the .config file** with your own Interactive Brokers userna
 
 Also, **update the global var whichacct in functions.py** to suit your needs. I have 2 accounts, and I want to retrieve info on the second, which is why I've set whichacct = 1. If you only have 1 account or want to access your first account, **set whichacct = 0**.
 
+You can paste the **custom command** from bash_custom.sh into your own .bash_profile to allow you to perform any of the defined functions with a single command. Remember to edit the $FILEPATH for the path to the IBWebAPI directory on your own machine.
+
 **Login**
 ```python functions.py login```
 
