@@ -44,7 +44,7 @@ def summary():
     getacct = checkstatus(auto=False)
     if getacct not in ['No response','Not logged in']:
         summ = hook + 'portfolio/{}/summary'.format(getacct)
-    elif input('Still unable to access server. Retry? [y/n]') in ['Y','y']:
+    elif input('Unable to access. Retry automatically? [y/n]') in ['Y','y']:
         checkstatus(auto=True)
     else:
         print('Process ended.')

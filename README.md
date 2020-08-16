@@ -20,7 +20,7 @@ Pings the server to keep it alive.
 
 **Summary**
 ```python functions.py summary```
-Prints the account net liquidation value.
+Prints the account net liquidation value. If server isn't initiated or account isn't logged in, an option will be given to run these processes automatically.
 
 **Authorization Status**
 ```python functions.py authstatus```
