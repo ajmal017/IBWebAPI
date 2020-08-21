@@ -18,9 +18,13 @@ function broker() {
             echo "Server started"
         elif [ "$status" = "Not logged in" ]; then
             python3 functions.py login
+            python3 functions.py ticklerepeat &
         else
             python3 functions.py summary
         fi
+    elif [ "$1" = "logout" ]; then
+        python3 functions.py logout
+        disown
     else
         python3 functions.py $1
     fi

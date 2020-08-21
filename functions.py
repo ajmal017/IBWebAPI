@@ -14,7 +14,7 @@ def tickle():
         response = requests.post(tickle, verify=False).json()
     except requests.exceptions.ConnectionError:
         print("No response")
-        return
+        return('No response')
     if 'session' in response.keys() and response['session'] == 'no session':
         print('Session ended, login again')
         subprocess.Popen(['sh', './autologin.sh'])
@@ -22,9 +22,10 @@ def tickle():
         authstatus()
         response = requests.post(tickle, verify=False).json()
     if 'iserver' in response.keys():
-        print('Server tickled.')
+        print('Server tickled')
+        return('Server tickled')
     else:
-        print('Unknown error.')
+        print('Unknown error')
 
 def authstatus():
     global hook
@@ -148,6 +149,12 @@ def getaccount(number):
     if response.status_code != 200:
         return 'Not logged in'
     return response.json()[number]['id']
+
+def ticklerepeat():
+    starttime = time.time()
+    while True:
+        tickle()
+        time.sleep(60.0 - ((time.time() - starttime) % 60.0))
 
 if __name__ == "__main__":
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
